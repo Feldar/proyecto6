@@ -11,6 +11,16 @@ use App\Http\Resources\CustomerResource;
 class CustomerController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Customer::class, 'customer');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -38,8 +48,6 @@ class CustomerController extends Controller
     {
         $customer = json_decode($request->getContent(), true);
         $customerData = $customer['data']['attributes'];
-        $customerData['user_id'] = $customerData['userId'];
-        unset($customerData['userId']);
 
         $customer = Customer::create($customerData);
 
