@@ -9,6 +9,7 @@ use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RecipeController;
 use App\Http\Controllers\API\TokenController;
+use App\Http\Controllers\API\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
 
 Route::apiResource('users', UserController::class);
+
+Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum');
 
 Route::get('recipes', [RecipeController::class, 'index']);
 
